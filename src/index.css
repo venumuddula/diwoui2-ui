@@ -1,0 +1,222 @@
+@import './styles/animations.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 0 84.2% 60.2%; /* Red accent color */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 0 84.2% 60.2%; /* Red accent for sidebar */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 240 5.9% 10%;
+
+    /* Animation durations */
+    --animation-fast: 150ms;
+    --animation-normal: 250ms;
+    --animation-slow: 350ms;
+    
+    /* Custom card hover colors */
+    --card-hover-bg: 0 100% 98%;
+    /* Integrated scrollbar colors - light theme */
+    --scrollbar-track: 0 0% 98%; /* Match background */
+    --scrollbar-thumb: 0 0% 85%; /* Subtle light gray */
+    --scrollbar-thumb-hover: 0 0% 75%; /* Slightly darker on hover */
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 0 84.2% 60.2%; /* Keep the red accent for dark mode */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    
+    --sidebar-background: 222 47% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 0 84.2% 60.2%; /* Red accent for sidebar in dark mode */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 212.7 26.8% 83.9%;
+    
+    /* Custom card colors for dark mode */
+    --card: 216 33% 23%; /* #252d3d */
+    --card-hover-bg: 216 33% 28%; /* Slightly lighter for hover */
+    /* Integrated scrollbar colors - dark theme */
+    --scrollbar-track: 222 47% 11%; /* Match background */
+    --scrollbar-thumb: 222 47% 20%; /* Subtle dark gray */
+    --scrollbar-thumb-hover: 222 47% 25%; /* Slightly lighter on hover */    
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Improve focus states for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--scrollbar-track));
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--scrollbar-thumb));
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--scrollbar-thumb-hover));
+  }
+  
+  /* Firefox scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--scrollbar-thumb)) hsl(var(--scrollbar-track));
+  }
+}
+
+/* Animation utility classes */
+@layer utilities {
+  .transition-standard {
+    @apply transition-all duration-normal ease-in-out;
+  }
+
+  .transition-fast {
+    @apply transition-all duration-fast ease-in-out;
+  }
+
+  .transition-slow {
+    @apply transition-all duration-slow ease-in-out;
+  }
+  
+  /* Define custom rounded-inherit utility class */
+  .rounded-inherit {
+    border-radius: inherit;
+  }
+  
+  /* Custom gradient for the user's name */
+  .name-gradient {
+    @apply bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-clip-text text-transparent;
+  }
+  
+  /* Scrollbar styling */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Card hover effects for dashboard */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+}
+
+/* Custom card styles for alert and metric cards */
+@layer components {
+  /* Common card hover styles - removed transition for metric-card */
+  .alert-card {
+    @apply transition-all duration-300;
+  }
+  
+  .metric-card {
+    /* Removed hover transition effects */
+  }
+  
+  /* Light mode hover styles - removed for metric-card */
+  .light .alert-card:hover {
+    @apply bg-gradient-to-br from-white to-red-50 shadow-md -translate-y-1;
+  }
+  
+  /* Dark mode styles with specific background color */
+  .dark .alert-card,
+  .dark .metric-card {
+    background-color: #252d3d;
+  }
+  
+  /* Dark mode hover styles - removed for metric-card */
+  .dark .alert-card:hover {
+    @apply bg-gradient-to-br from-[#252d3d] to-[#303b52] shadow-md -translate-y-1;
+  }
+}
+

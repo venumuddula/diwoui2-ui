@@ -1,0 +1,134 @@
+/* Pulse animation for New Analysis button */
+.pulse-animation {
+  position: relative;
+}
+
+.pulse-animation::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  animation: button-pulse 2s infinite;
+  box-shadow: 0 0 0 0 rgba(234, 0, 0, 0.5);
+}
+
+@keyframes button-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(234, 0, 0, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(234, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(234, 0, 0, 0);
+  }
+}
+
+/* Zoom animation for AI Score Average icon */
+.zoom-animation {
+  animation: subtle-zoom 3s ease-in-out infinite;
+}
+
+@keyframes subtle-zoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Pulsing red dot for critical cards */
+.critical-dot {
+  position: absolute;
+  top: 12px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(239, 68, 68);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.critical-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: dot-pulse 2s infinite;
+  background-color: rgb(239, 68, 68);
+}
+
+@keyframes dot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Chat message styling */
+.message-bubble {
+  @apply relative rounded-2xl p-4 max-w-4xl;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.message-bubble.ai {
+  @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-gray-200/20 dark:border-gray-700/20 shadow-sm;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.message-bubble.ai::before {
+  content: '';
+  @apply absolute -inset-px -z-10 opacity-0 transition-opacity duration-300;
+  box-shadow: 0 0 15px rgba(234, 56, 76, 0.3);
+  border-radius: inherit;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.message-bubble.ai:hover::before {
+  @apply opacity-50;
+}
+
+.message-bubble.ai::after {
+  content: '';
+  @apply absolute inset-0 -z-10 opacity-0 transition-opacity duration-300;
+  background: linear-gradient(
+    135deg,
+    rgba(234, 56, 76, 0.01) 0%,
+    rgba(234, 56, 76, 0.05) 25%,
+    rgba(66, 153, 225, 0.05) 50%,
+    rgba(234, 56, 76, 0.05) 75%,
+    rgba(234, 56, 76, 0.01) 100%
+  );
+  background-size: 200% 200%;
+  animation: shimmer 8s ease-in-out infinite;
+  border-radius: inherit;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.message-bubble.ai:hover::after {
+  @apply opacity-100;
+}
+
+.message-bubble.user {
+  @apply bg-gray-100 dark:bg-gray-700/70 ml-auto;
+  border-bottom-right-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
